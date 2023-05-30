@@ -1,7 +1,6 @@
 package hello.proxy.app.v3;
 
 
-import hello.proxy.app.v2.OrderServiceV3;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
