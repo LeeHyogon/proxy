@@ -2,10 +2,9 @@ package hello.proxy.proxyfactory;
 
 import hello.proxy.common.advice.TimeAdvice;
 import hello.proxy.common.service.ConcreteService;
-import hello.proxy.common.service.SerivceInterface;
+import hello.proxy.common.service.ServiceInterface;
 import hello.proxy.common.service.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.aop.framework.ProxyFactory;
@@ -18,10 +17,10 @@ public class ProxyFactoryTest {
     @Test
     @DisplayName("인터페이스가 있으면 JDK 동적 프록시 사용")
     void interfaceProxy() {
-        SerivceInterface target = new ServiceImpl();
+        ServiceInterface target = new ServiceImpl();
         ProxyFactory proxyFactory = new ProxyFactory(target);
         proxyFactory.addAdvice(new TimeAdvice());
-        SerivceInterface proxy = (SerivceInterface) proxyFactory.getProxy();
+        ServiceInterface proxy = (ServiceInterface) proxyFactory.getProxy();
         log.info("targetClass={}",target.getClass());
         log.info("proxyClass={}", proxy.getClass());
 
@@ -53,11 +52,11 @@ public class ProxyFactoryTest {
     @Test
     @DisplayName("proxyTargetClass 옵션을 사용하면 인터페이스가 있어도 CGLIB를 사용하고, 클래스 기반 프록시 사용")
     void proxyTargetClass() {
-        SerivceInterface target = new ServiceImpl();
+        ServiceInterface target = new ServiceImpl();
         ProxyFactory proxyFactory = new ProxyFactory(target);
         proxyFactory.setProxyTargetClass(true);
         proxyFactory.addAdvice(new TimeAdvice());
-        SerivceInterface proxy = (SerivceInterface) proxyFactory.getProxy();
+        ServiceInterface proxy = (ServiceInterface) proxyFactory.getProxy();
         log.info("targetClass={}",target.getClass());
         log.info("proxyClass={}", proxy.getClass());
 
